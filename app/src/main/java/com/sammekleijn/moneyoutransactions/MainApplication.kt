@@ -2,7 +2,4 @@ package com.sammekleijn.moneyoutransactions
 
 import android.app.Application
 
-class MainApplication: Application() {
-
-
-}
+class MainApplication: Application()

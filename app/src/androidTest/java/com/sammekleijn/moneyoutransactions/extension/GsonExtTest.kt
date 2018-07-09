@@ -1,7 +1,6 @@
-package com.sammekleijn.moneyoutransactions
+package com.sammekleijn.moneyoutransactions.extension
 
 import android.support.test.InstrumentationRegistry
-import com.sammekleijn.moneyoutransactions.extension.fromJson
 import com.sammekleijn.moneyoutransactions.model.Customer
 import junit.framework.Assert.*
 import org.junit.Test

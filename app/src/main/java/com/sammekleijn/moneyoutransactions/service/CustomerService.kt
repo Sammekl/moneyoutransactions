@@ -3,7 +3,6 @@ package com.sammekleijn.moneyoutransactions.service
 import android.content.Context
 import com.sammekleijn.moneyoutransactions.extension.fromJson
 import com.sammekleijn.moneyoutransactions.model.Customer
-import io.reactivex.Observable
 import io.reactivex.Single
 
 class CustomerService {

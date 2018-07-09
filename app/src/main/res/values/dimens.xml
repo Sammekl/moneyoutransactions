@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_vertical_margin_between_objects">8dp</dimen>
+    <dimen name="default_horizontal_margin_between_objects">8dp</dimen>
+
+    <dimen name="default_vertical_margin_between_layouts">16dp</dimen>
+    <dimen name="default_horizontal_margin_between_layouts">16dp</dimen>
+</resources>
