@@ -1,8 +1,7 @@
 package com.sammekleijn.moneyoutransactions
 
 import android.support.test.InstrumentationRegistry
-import com.google.gson.Gson
-import com.sammekleijn.moneyoutransactions.extension.fromInputStream
+import com.sammekleijn.moneyoutransactions.extension.fromJson
 import com.sammekleijn.moneyoutransactions.model.Customer
 import junit.framework.Assert.*
 import org.junit.Test
@@ -15,7 +14,7 @@ class GsonExtTest {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val inputStream = context.assets.open("transactions.json")
 
-        val customer = Gson().fromInputStream(inputStream, Customer::class.java)
+        val customer = inputStream.fromJson(Customer::class.java)
 
         assertNotNull(customer)
         assertEquals("NL30MOYO0001234567", customer.account)
