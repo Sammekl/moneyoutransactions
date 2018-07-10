@@ -7,15 +7,15 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class ServiceModule {
+open class ServiceModule {
 
     @Provides
     @Singleton
-    internal fun customerService(context: Context): CustomerService {
+    internal open fun customerService(context: Context): CustomerService {
         return buildCustomerService(context)
     }
 
-    protected fun buildCustomerService(context: Context): CustomerService {
+    protected open fun buildCustomerService(context: Context): CustomerService {
         return CustomerService(context)
     }
 

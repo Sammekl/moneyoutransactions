@@ -5,7 +5,9 @@ import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
+import com.sammekleijn.moneyoutransactions.MainApplication
 import com.sammekleijn.moneyoutransactions.R
+import com.sammekleijn.moneyoutransactions.injection.module.TestServiceModule
 import com.sammekleijn.moneyoutransactions.model.Customer
 import com.sammekleijn.moneyoutransactions.service.CustomerService
 import io.reactivex.Single
@@ -17,8 +19,7 @@ import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 
-class DashoardActivityTest {
-
+class DashoardActivityTest: BaseActivityTest() {
     @Rule
     @JvmField
     val dashoardActivity = ActivityTestRule(DashoardActivity::class.java, true, false)
@@ -32,7 +33,10 @@ class DashoardActivityTest {
 
     }
 
-    @Ignore
+    override fun setupMocks(testServiceModule: TestServiceModule) {
+        testServiceModule.customerService = customerService
+    }
+
     @Test
     fun showsAccountBalance() {
         val customer = Customer("123", 500.71f, mutableListOf())

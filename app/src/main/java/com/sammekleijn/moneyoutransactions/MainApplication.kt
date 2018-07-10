@@ -17,9 +17,14 @@ class MainApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         component.inject(this)
 
         ServiceLocator.applicationComponent = component
         ServiceLocator.application = this
+    }
+
+    companion object {
+        lateinit var instance: MainApplication
     }
 }
