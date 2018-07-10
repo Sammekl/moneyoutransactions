@@ -1,11 +1,13 @@
 package com.sammekleijn.moneyoutransactions.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.sammekleijn.moneyoutransactions.R
+import com.sammekleijn.moneyoutransactions.extension.toStringWithPrecision
 import com.sammekleijn.moneyoutransactions.injection.ServiceLocator
 import com.sammekleijn.moneyoutransactions.model.Customer
 import com.sammekleijn.moneyoutransactions.model.Transaction
@@ -43,7 +45,7 @@ class DashoardActivity : AppCompatActivity() {
                 .subscribe({ customer ->
                     show(customer)
                 }, { error ->
-                    Snackbar.make(coordinatorLayout, "Something when wrong while retrieving your account", Snackbar.LENGTH_LONG)
+                    Snackbar.make(coordinatorLayout, getString(R.string.account_retrieval_failed), Snackbar.LENGTH_LONG)
                 })
     }
 
@@ -61,7 +63,7 @@ class DashoardActivity : AppCompatActivity() {
 
     private fun show(customer: Customer) {
         accountNumberTextView.text = customer.account
-        accountBalanceTextView.text = getString(R.string.account_balance, "%.2f".format(customer.balance))
+        accountBalanceTextView.text = getString(R.string.account_balance, customer.balance.toStringWithPrecision(2))
 
         transactions.clear()
         transactions.addAll(customer.transactions)
@@ -69,6 +71,11 @@ class DashoardActivity : AppCompatActivity() {
     }
 
     private fun open(transaction: Transaction?) {
-
+        if (transaction == null) {
+            Snackbar.make(coordinatorLayout, getString(R.string.transaction_open_failed), Snackbar.LENGTH_LONG)
+        } else {
+            val intent = TransactionDetailActivity.createIntent(this, transaction)
+            startActivity(intent)
+        }
     }
 }

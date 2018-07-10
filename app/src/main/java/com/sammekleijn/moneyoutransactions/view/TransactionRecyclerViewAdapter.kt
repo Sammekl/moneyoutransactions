@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.sammekleijn.moneyoutransactions.R
+import com.sammekleijn.moneyoutransactions.extension.toEuro
 import com.sammekleijn.moneyoutransactions.model.Transaction
 
 class TransactionRecyclerViewAdapter(private var transactions: List<Transaction>, private val openListener: (Transaction?) -> Unit)
@@ -38,7 +39,9 @@ class TransactionRecyclerViewAdapter(private var transactions: List<Transaction>
         val context = view.context
 
         init {
-            relativeLayout!!.setOnClickListener { openListener(transaction) }
+            relativeLayout!!.setOnClickListener {
+                openListener(transaction)
+            }
         }
 
         fun showTransaction(transaction: Transaction) {
@@ -49,13 +52,13 @@ class TransactionRecyclerViewAdapter(private var transactions: List<Transaction>
 
         private fun formatAmount(amount: Float) {
             val incomingTransaction = amount > 0.0
-            val colorResource: Int
-            amountTextView.text = if (incomingTransaction) {
-                colorResource = R.color.colorIncomingTransaction
-                "+ € $amount"
+
+            amountTextView.text = amount.toEuro(2)
+
+            val colorResource = if (incomingTransaction) {
+                R.color.colorIncomingTransaction
             } else {
-                colorResource = R.color.colorOutgoingTransaction
-                "- € ${amount.unaryMinus()}"
+                R.color.colorOutgoingTransaction
             }
 
             amountTextView.setTextColor(ContextCompat.getColor(context, colorResource))

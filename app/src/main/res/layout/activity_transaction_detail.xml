@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.TransactionDetailActivity">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_vertical_margin_between_layouts"
+        android:layout_marginEnd="@dimen/default_horizontal_margin_between_layouts"
+        android:layout_marginStart="@dimen/default_horizontal_margin_between_layouts"
+        android:layout_marginTop="@dimen/default_vertical_margin_between_layouts">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/transactionIdTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Trx1"
+                android:layout_marginBottom="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginStart="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginTop="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginRight="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginLeft="@dimen/default_horizontal_margin_between_objects" />
+
+            <TextView
+                android:id="@+id/transactionAmountTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="+ €20.31"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginStart="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginTop="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginRight="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginLeft="@dimen/default_horizontal_margin_between_objects"/>
+
+            <TextView
+                android:id="@+id/transactionDescriptionInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/transactionIdTextView"
+                android:textStyle="bold"
+                android:text="@string/description"
+                android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginStart="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginTop="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginRight="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginLeft="@dimen/default_horizontal_margin_between_objects"/>
+
+            <TextView
+                android:id="@+id/transactionDescriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/transactionDescriptionInfoTextView"
+                tools:text="starbucks amsterdam CS"
+                android:layout_marginBottom="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginStart="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginRight="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginLeft="@dimen/default_horizontal_margin_between_objects"/>
+
+            <TextView
+                android:id="@+id/transactionDateInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/transactionDescriptionTextView"
+                android:text="@string/date"
+                android:textStyle="bold"
+                android:layout_marginStart="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginTop="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginRight="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginLeft="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginEnd="@dimen/default_vertical_margin_between_objects" />
+
+            <TextView
+                android:id="@+id/transactionDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/transactionDateInfoTextView"
+                tools:text="10 augustus 2017"
+                android:layout_marginBottom="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginStart="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginRight="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginLeft="@dimen/default_horizontal_margin_between_objects"/>
+
+            <TextView
+                android:id="@+id/transactionCounterpartyInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/transactionDateTextView"
+                android:textStyle="bold"
+                android:text="@string/counter_party"
+                android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginStart="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginTop="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginRight="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginLeft="@dimen/default_horizontal_margin_between_objects"/>
+            <TextView
+                android:id="@+id/transactionCounterpartyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/transactionCounterpartyInfoTextView"
+                tools:text="NL91ABNA0417164300"
+                android:layout_marginBottom="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginStart="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginRight="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginLeft="@dimen/default_horizontal_margin_between_objects"/>
+
+            <TextView
+                android:id="@+id/balanceAfterTransactionInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/transactionCounterpartyTextView"
+                android:textStyle="bold"
+                android:text="@string/balance_after_transaction"
+                android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginStart="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginTop="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginRight="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginLeft="@dimen/default_horizontal_margin_between_objects"/>
+            <TextView
+                android:id="@+id/balanceAfterTransactionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/balanceAfterTransactionInfoTextView"
+                tools:text="€300"
+                android:layout_marginBottom="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginStart="@dimen/default_horizontal_margin_between_objects"
+                android:layout_marginRight="@dimen/default_vertical_margin_between_objects"
+                android:layout_marginLeft="@dimen/default_horizontal_margin_between_objects"/>
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

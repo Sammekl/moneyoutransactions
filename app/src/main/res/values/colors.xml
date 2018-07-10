@@ -3,9 +3,8 @@
     // Brand colors
     <color name="colorPrimary">#535A92</color>
     <color name="colorPrimaryDark">#535A92</color>
-    <color name="colorAccent">#F8B73D</color>
+    <color name="colorAccent">#22ACCC</color>
     <color name="colorGrey">#9b9b9b</color>
-    <color name="colorCyan">#22ACCC</color>
 
     // Transaction colors
     <color name="colorIncomingTransaction">@color/colorPrimary</color>

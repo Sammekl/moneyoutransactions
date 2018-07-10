@@ -1,5 +1,8 @@
 package com.sammekleijn.moneyoutransactions.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
-data class Transaction(val id: String, val amount: Float, val description: String?, val otherAccount: String, val date: Date)
+@Parcelize
+data class Transaction(val id: String, val amount: Float, val description: String?, val otherAccount: String, val date: Date) : Parcelable
