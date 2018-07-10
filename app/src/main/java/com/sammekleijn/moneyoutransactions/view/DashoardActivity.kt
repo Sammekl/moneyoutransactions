@@ -6,16 +6,20 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.sammekleijn.moneyoutransactions.R
+import com.sammekleijn.moneyoutransactions.injection.ServiceLocator
 import com.sammekleijn.moneyoutransactions.model.Customer
 import com.sammekleijn.moneyoutransactions.model.Transaction
 import com.sammekleijn.moneyoutransactions.service.CustomerService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_dashoard.*
-import java.util.ArrayList
+import java.util.*
+import javax.inject.Inject
 
 class DashoardActivity : AppCompatActivity() {
-    private val customerService: CustomerService = CustomerService()
+
+    @Inject
+    lateinit var customerService: CustomerService
 
     private var transactions: MutableList<Transaction> = ArrayList()
 
@@ -23,6 +27,7 @@ class DashoardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ServiceLocator.applicationComponent?.inject(this)
         setContentView(R.layout.activity_dashoard)
 
         setupAdapter()
@@ -32,7 +37,7 @@ class DashoardActivity : AppCompatActivity() {
     }
 
     private fun retrieveTransactions() {
-        CustomerService().getCustomer(this.applicationContext)
+        customerService.getCustomer()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ customer ->
@@ -55,7 +60,9 @@ class DashoardActivity : AppCompatActivity() {
     }
 
     private fun show(customer: Customer) {
-        title = "Account: ${customer.account}"
+        accountNumberTextView.text = customer.account
+        accountBalanceTextView.text = getString(R.string.account_balance, "%.2f".format(customer.balance))
+
         transactions.clear()
         transactions.addAll(customer.transactions)
         transactionRecyclerViewAdapter.notifyDataSetChanged()

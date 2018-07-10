@@ -1,9 +1,7 @@
 package com.sammekleijn.moneyoutransactions.view
 
-import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
-import android.text.Spannable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +31,7 @@ class TransactionRecyclerViewAdapter(private var transactions: List<Transaction>
 
         private var transaction: Transaction? = null
 
-        private val relativeLayout = view.findViewById<RelativeLayout>(R.id.endpointItemRelativeLayout)
+        private val relativeLayout = view.findViewById<RelativeLayout>(R.id.transactionItemRelativeLayout)
         private val otherAccountTextView = view.findViewById<TextView>(R.id.otherAccountTextView)
         private val amountTextView = view.findViewById<TextView>(R.id.amountTextView)
 

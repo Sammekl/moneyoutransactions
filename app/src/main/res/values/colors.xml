@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // Brand colors
-    <color name="colorPrimary">#d40d47</color>
-    <color name="colorPrimaryDark">#7F0E3E</color>
+    <color name="colorPrimary">#535A92</color>
+    <color name="colorPrimaryDark">#535A92</color>
     <color name="colorAccent">#F8B73D</color>
-    <color name="colorPurple">#535A92</color>
     <color name="colorGrey">#9b9b9b</color>
     <color name="colorCyan">#22ACCC</color>
 
     // Transaction colors
-    <color name="colorIncomingTransaction">@color/colorPurple</color>
+    <color name="colorIncomingTransaction">@color/colorPrimary</color>
     <color name="colorOutgoingTransaction">@color/colorGrey</color>
+    <color name="white">#FFF</color>
 
 
 </resources>

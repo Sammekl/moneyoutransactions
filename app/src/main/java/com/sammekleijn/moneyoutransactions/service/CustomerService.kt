@@ -5,9 +5,9 @@ import com.sammekleijn.moneyoutransactions.extension.fromJson
 import com.sammekleijn.moneyoutransactions.model.Customer
 import io.reactivex.Single
 
-class CustomerService {
+open class CustomerService(val context: Context) {
 
-    fun getCustomer(context: Context): Single<Customer> {
+    fun getCustomer(): Single<Customer> {
         val inputStream = context.assets.open("transactions.json")
 
         return Single.fromCallable {

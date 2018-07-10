@@ -10,7 +10,7 @@ class CustomerServiceTest {
     fun shouldSortTransactions() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
 
-        val customer = CustomerService().getCustomer(context).blockingGet()
+        val customer = CustomerService(context).getCustomer().blockingGet()
 
         assertEquals("trx1", customer.transactions[0].id)
         assertEquals("trx2", customer.transactions[1].id)
