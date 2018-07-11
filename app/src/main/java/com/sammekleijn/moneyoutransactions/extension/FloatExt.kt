@@ -8,6 +8,6 @@ fun Float.toEuro(precision: Int = 2): String {
     return if (this > 0f) {
         "+ €${this.toStringWithPrecision(precision)}"
     } else {
-        "- €${this.toStringWithPrecision(precision)}"
+        "- €${this.unaryMinus().toStringWithPrecision(precision)}"
     }
 }
