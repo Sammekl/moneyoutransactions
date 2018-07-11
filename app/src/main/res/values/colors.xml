@@ -9,7 +9,6 @@
     // Transaction colors
     <color name="colorIncomingTransaction">@color/colorPrimary</color>
     <color name="colorOutgoingTransaction">@color/colorGrey</color>
+
     <color name="white">#FFF</color>
-
-
 </resources>
