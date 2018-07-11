@@ -2,9 +2,8 @@ package com.sammekleijn.moneyoutransactions.view
 
 import android.content.Intent
 import android.support.test.rule.ActivityTestRule
-import com.sammekleijn.moneyoutransactions.injection.ServiceLocator
-import com.sammekleijn.moneyoutransactions.injection.component.TestAppComponent
-import com.sammekleijn.moneyoutransactions.injection.module.TestServiceModule
+import com.sammekleijn.moneyoutransactions.MainApplication
+import com.sammekleijn.moneyoutransactions.injection.*
 import org.junit.Before
 
 abstract class BaseActivityTest {
@@ -15,18 +14,20 @@ abstract class BaseActivityTest {
 
         setupMocks(testServiceModule)
 
-//        val appcomponent: TestAppComponent by lazy {
-//            DaggerTestAppComponent
-//                    .builder()
-//                    .build()
-//        }
-//
-//        ServiceLocator.applicationComponent = appcomponent
-//
-//        doInject(appcomponent)
+        val appcomponent: TestApplicationComponent by lazy {
+            DaggerTestApplicationComponent
+                    .builder()
+                    .appModule(AppModule(MainApplication.instance))
+                    .testServiceModule(testServiceModule)
+                    .build()
+        }
+
+        ServiceLocator.applicationComponent = appcomponent
+
+        doInject(appcomponent)
     }
 
-    protected fun doInject(appComponent: TestAppComponent) {
+    protected open fun doInject(testApplicationComponent: TestApplicationComponent) {
 
     }
 

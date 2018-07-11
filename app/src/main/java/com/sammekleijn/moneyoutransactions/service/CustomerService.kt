@@ -7,7 +7,7 @@ import io.reactivex.Single
 
 open class CustomerService(val context: Context) {
 
-    fun getCustomer(): Single<Customer> {
+    open fun getCustomer(): Single<Customer> {
         val inputStream = context.assets.open("transactions.json")
 
         return Single.fromCallable {

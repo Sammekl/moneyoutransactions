@@ -4,6 +4,6 @@ import android.app.Application
 
 object ServiceLocator {
 
-    var applicationComponent: AppComponent? = null
+    var applicationComponent: ApplicationComponent? = null
     var application: Application? = null
 }

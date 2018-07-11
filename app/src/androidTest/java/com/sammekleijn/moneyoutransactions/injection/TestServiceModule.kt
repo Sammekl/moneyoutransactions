@@ -1,4 +1,4 @@
-package com.sammekleijn.moneyoutransactions.injection.module
+package com.sammekleijn.moneyoutransactions.injection
 
 import android.content.Context
 
@@ -18,5 +18,4 @@ open class TestServiceModule : ServiceModule() {
         }
         return customerService as CustomerService
     }
-
 }
