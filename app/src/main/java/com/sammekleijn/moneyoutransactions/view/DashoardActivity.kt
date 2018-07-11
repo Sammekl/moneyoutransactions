@@ -27,9 +27,12 @@ class DashoardActivity : AppCompatActivity() {
 
     lateinit var transactionRecyclerViewAdapter: TransactionRecyclerViewAdapter
 
+    lateinit var customer: Customer
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ServiceLocator.applicationComponent?.inject(this)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_dashoard)
 
         setupAdapter()
@@ -62,6 +65,7 @@ class DashoardActivity : AppCompatActivity() {
     }
 
     private fun show(customer: Customer) {
+        this.customer = customer
         accountNumberTextView.text = customer.account
         accountBalanceTextView.text = getString(R.string.account_balance, customer.balance.toStringWithPrecision(2))
 
@@ -74,8 +78,13 @@ class DashoardActivity : AppCompatActivity() {
         if (transaction == null) {
             Snackbar.make(coordinatorLayout, getString(R.string.transaction_open_failed), Snackbar.LENGTH_LONG)
         } else {
+            addBalanceTo(transaction)
             val intent = TransactionDetailActivity.createIntent(this, transaction)
             startActivity(intent)
         }
+    }
+
+    private fun addBalanceTo(transaction: Transaction) {
+        transaction.balanceAfterTransaction = customer.getBalanceAt(transaction.date)
     }
 }

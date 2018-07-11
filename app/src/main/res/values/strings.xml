@@ -7,4 +7,6 @@
     <string name="date">Date</string>
     <string name="counter_party">Counterparty</string>
     <string name="description">Description</string>
+    <string name="transaction_id">Transaction: %s</string>
+    <string name="unknown">unknown</string>
 </resources>

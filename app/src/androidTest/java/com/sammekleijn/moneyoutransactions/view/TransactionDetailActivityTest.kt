@@ -20,7 +20,7 @@ class TransactionDetailActivityTest {
 
     @Test
     fun showsTransactionWhenActivityIsLaunched() {
-        val transaction = Transaction("123", 671.23f, "This is a test", "Belastingdienst", Date())
+        val transaction = Transaction("123", 671.23f, "This is a test", "Belastingdienst", Date(), 830.21f)
 
         launchActivityWith(transaction)
 
@@ -29,8 +29,6 @@ class TransactionDetailActivityTest {
     }
 
     private fun verifyTransactionIsShown(transaction: Transaction) {
-        onView(withId(R.id.transactionIdTextView)).check(matches(withText(transaction.id)))
-
         val transactionAmount = if (transaction.amount > 0) {
             "+ €${transaction.amount}"
         } else {
@@ -41,6 +39,7 @@ class TransactionDetailActivityTest {
         onView(withId(R.id.transactionCounterpartyTextView)).check(matches(withText(transaction.otherAccount)))
         onView(withId(R.id.transactionDateTextView)).check(matches(withText(transaction.date.toString())))
         onView(withId(R.id.transactionDescriptionTextView)).check(matches(withText(transaction.description)))
+        onView(withId(R.id.balanceAfterTransactionTextView)).check(matches(withText("€${transaction.balanceAfterTransaction}")))
 
     }
 
