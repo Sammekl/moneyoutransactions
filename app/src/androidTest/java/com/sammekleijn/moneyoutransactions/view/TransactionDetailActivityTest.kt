@@ -7,6 +7,8 @@ import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import com.sammekleijn.moneyoutransactions.R
+import com.sammekleijn.moneyoutransactions.extension.toDateTimeString
+import com.sammekleijn.moneyoutransactions.extension.toStringWithPrecision
 import com.sammekleijn.moneyoutransactions.model.Transaction
 import org.junit.Rule
 import org.junit.Test
@@ -37,8 +39,9 @@ class TransactionDetailActivityTest {
 
         onView(withId(R.id.transactionAmountTextView)).check(matches(withText(transactionAmount)))
         onView(withId(R.id.transactionCounterpartyTextView)).check(matches(withText(transaction.otherAccount)))
-        onView(withId(R.id.transactionDateTextView)).check(matches(withText(transaction.date.toString())))
+        onView(withId(R.id.transactionDateTextView)).check(matches(withText(transaction.date.toDateTimeString())))
         onView(withId(R.id.transactionDescriptionTextView)).check(matches(withText(transaction.description)))
+        onView(withId(R.id.balanceBeforeTransactionTextView)).check(matches(withText("€${(transaction.balanceAfterTransaction!! + transaction.amount.unaryMinus()).toStringWithPrecision(2)}")))
         onView(withId(R.id.balanceAfterTransactionTextView)).check(matches(withText("€${transaction.balanceAfterTransaction}")))
 
     }

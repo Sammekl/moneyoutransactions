@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">MoneYouTransactions</string>
+    <string name="app_name">MoneYou +</string>
     <string name="account_balance">€%s</string>
     <string name="transaction_open_failed">Transaction cannot be opened</string>
     <string name="account_retrieval_failed">Something when wrong while retrieving your account</string>
+    <string name="balance_before_transaction">Balance before transaction</string>
     <string name="balance_after_transaction">Balance after transaction</string>
     <string name="date">Date</string>
     <string name="counter_party">Counterparty</string>

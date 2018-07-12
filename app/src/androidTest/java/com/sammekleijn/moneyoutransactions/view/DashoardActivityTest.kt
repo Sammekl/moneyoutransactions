@@ -15,6 +15,7 @@ import android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
+import com.sammekleijn.moneyoutransactions.MainApplication
 import com.sammekleijn.moneyoutransactions.R
 import com.sammekleijn.moneyoutransactions.extension.launch
 import com.sammekleijn.moneyoutransactions.extension.toEuro
@@ -30,6 +31,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
+import java.io.IOException
 import java.util.*
 
 class DashoardActivityTest : BaseActivityTest() {
@@ -73,6 +75,15 @@ class DashoardActivityTest : BaseActivityTest() {
     }
 
     @Test
+    fun showsErrorWhenGetCustomerFails() {
+        givenAnError()
+
+        dashoardActivity.launch()
+
+        verifySnackBarIsShown(MainApplication.instance.applicationContext.getString(R.string.account_retrieval_failed))
+    }
+
+    @Test
     fun opensDetailWhenClickingTransaction() {
         val customer = givenACustomer()
 
@@ -97,6 +108,10 @@ class DashoardActivityTest : BaseActivityTest() {
         `when`(customerService.getCustomer()).thenReturn(Single.just(customer))
 
         return customer
+    }
+
+    private fun givenAnError() {
+        `when`(customerService.getCustomer()).thenReturn(Single.error(IOException("Oops!")))
     }
 
 }

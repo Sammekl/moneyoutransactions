@@ -2,13 +2,13 @@ package com.sammekleijn.moneyoutransactions.view
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.sammekleijn.moneyoutransactions.R
+import com.sammekleijn.moneyoutransactions.extension.toDateTimeString
 import com.sammekleijn.moneyoutransactions.extension.toEuro
 import com.sammekleijn.moneyoutransactions.extension.toStringWithPrecision
-import com.sammekleijn.moneyoutransactions.model.Customer
 import com.sammekleijn.moneyoutransactions.model.Transaction
 import kotlinx.android.synthetic.main.activity_transaction_detail.*
 
@@ -38,7 +38,15 @@ class TransactionDetailActivity : AppCompatActivity() {
             transactionCounterpartyTextView.text = transaction.otherAccount
             transactionAmountTextView.text = transaction.amount.toEuro()
             transactionDescriptionTextView.text = transaction.description
-            transactionDateTextView.text = "${transaction.date}"
+            transactionDateTextView.text = transaction.date.toDateTimeString()
+            transaction.balanceAfterTransaction?.let {
+                balanceBeforeTransactionTextView.text = getString(R.string.account_balance, (it + transaction.amount.unaryMinus()).toStringWithPrecision(2))
+                balanceAfterTransactionTextView.text = getString(R.string.account_balance, it.toStringWithPrecision(2))
+            } ?: run {
+                balanceBeforeTransactionTextView.text = getString(R.string.unknown)
+                balanceAfterTransactionTextView.text = getString(R.string.unknown)
+            }
+
             balanceAfterTransactionTextView.text = if (transaction.balanceAfterTransaction != null) {
                 getString(R.string.account_balance, transaction.balanceAfterTransaction!!.toStringWithPrecision(2))
             } else {

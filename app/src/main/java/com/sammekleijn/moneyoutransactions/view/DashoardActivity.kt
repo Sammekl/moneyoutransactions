@@ -48,7 +48,7 @@ class DashoardActivity : AppCompatActivity() {
                 .subscribe({ customer ->
                     show(customer)
                 }, { error ->
-                    Snackbar.make(coordinatorLayout, getString(R.string.account_retrieval_failed), Snackbar.LENGTH_LONG)
+                    Snackbar.make(coordinatorLayout, getString(R.string.account_retrieval_failed), Snackbar.LENGTH_LONG).show()
                 })
     }
 

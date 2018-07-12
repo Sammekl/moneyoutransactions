@@ -1,7 +1,9 @@
 package com.sammekleijn.moneyoutransactions.view
 
-import android.content.Intent
-import android.support.test.rule.ActivityTestRule
+import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.assertion.ViewAssertions.matches
+import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
+import android.support.test.espresso.matcher.ViewMatchers.withText
 import com.sammekleijn.moneyoutransactions.MainApplication
 import com.sammekleijn.moneyoutransactions.injection.*
 import org.junit.Before
@@ -33,7 +35,9 @@ abstract class BaseActivityTest {
 
     protected abstract fun setupMocks(testServiceModule: TestServiceModule)
 
-    protected fun launchActivity(testRule: ActivityTestRule<*>) {
-        testRule.launchActivity(Intent())
+    fun verifySnackBarIsShown(message: String) {
+        Thread.sleep(500)
+
+        onView(withText(message)).check(matches(isDisplayed()))
     }
 }

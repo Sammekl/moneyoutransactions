@@ -74,10 +74,25 @@
                 style="@style/TextAppearance.CardView"/>
 
             <TextView
-                android:id="@+id/balanceAfterTransactionInfoTextView"
+                android:id="@+id/balanceBeforeTransactionInfoTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/transactionCounterpartyTextView"
+                android:text="@string/balance_before_transaction"
+                style="@style/TextAppearance.CardView.Header"/>
+            <TextView
+                android:id="@+id/balanceBeforeTransactionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/balanceBeforeTransactionInfoTextView"
+                tools:text="€279,69"
+                style="@style/TextAppearance.CardView"/>
+
+            <TextView
+                android:id="@+id/balanceAfterTransactionInfoTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/balanceBeforeTransactionTextView"
                 android:text="@string/balance_after_transaction"
                 style="@style/TextAppearance.CardView.Header"/>
             <TextView
