@@ -1,15 +1,10 @@
 package com.sammekleijn.moneyoutransactions.view
 
-import android.app.Activity
-import android.app.Instrumentation
-import android.content.Intent
-import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.intent.Intents
 import android.support.test.espresso.intent.Intents.intended
-import android.support.test.espresso.intent.Intents.intending
 import android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import android.support.test.espresso.intent.matcher.IntentMatchers.hasExtra
 import android.support.test.espresso.matcher.ViewMatchers.withId
@@ -34,11 +29,11 @@ import org.mockito.Mockito.mock
 import java.io.IOException
 import java.util.*
 
-class DashoardActivityTest : BaseActivityTest() {
+class DashboardActivityTest : BaseActivityTest() {
 
     @Rule
     @JvmField
-    val dashoardActivity = ActivityTestRule(DashoardActivity::class.java, true, false)
+    val dashoardActivity = ActivityTestRule(DashboardActivity::class.java, true, false)
 
     lateinit var customerService: CustomerService
 

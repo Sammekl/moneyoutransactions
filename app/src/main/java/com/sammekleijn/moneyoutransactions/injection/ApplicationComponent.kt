@@ -1,7 +1,7 @@
 package com.sammekleijn.moneyoutransactions.injection
 
 import com.sammekleijn.moneyoutransactions.MainApplication
-import com.sammekleijn.moneyoutransactions.view.DashoardActivity
+import com.sammekleijn.moneyoutransactions.view.DashboardActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -11,5 +11,5 @@ interface ApplicationComponent {
 
     fun inject(app: MainApplication)
 
-    fun inject(dashoardActivity: DashoardActivity)
+    fun inject(dashboardActivity: DashboardActivity)
 }

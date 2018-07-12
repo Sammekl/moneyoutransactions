@@ -28,9 +28,18 @@ class TransactionDetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            finish()
+            closeActivity()
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    override fun onBackPressed() {
+        closeActivity()
+    }
+
+    private fun closeActivity() {
+        finish()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
     }
 
     private fun show() {

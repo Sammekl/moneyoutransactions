@@ -1,6 +1,5 @@
 package com.sammekleijn.moneyoutransactions.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -14,11 +13,11 @@ import com.sammekleijn.moneyoutransactions.model.Transaction
 import com.sammekleijn.moneyoutransactions.service.CustomerService
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_dashoard.*
+import kotlinx.android.synthetic.main.activity_dashboard.*
 import java.util.*
 import javax.inject.Inject
 
-class DashoardActivity : AppCompatActivity() {
+class DashboardActivity : AppCompatActivity() {
 
     @Inject
     lateinit var customerService: CustomerService
@@ -33,7 +32,7 @@ class DashoardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         ServiceLocator.applicationComponent?.inject(this)
         supportActionBar?.hide()
-        setContentView(R.layout.activity_dashoard)
+        setContentView(R.layout.activity_dashboard)
 
         setupAdapter()
 
@@ -55,8 +54,9 @@ class DashoardActivity : AppCompatActivity() {
     private fun setupAdapter() {
         transactionRecyclerViewAdapter = TransactionRecyclerViewAdapter(transactions) { open(it) }
 
-        val linearLayoutManager = LinearLayoutManager(transactionsRecyclerView.context)
+        val linearLayoutManager = LinearLayoutManager(transactionsRecyclerView.context, LinearLayoutManager.VERTICAL, false)
         transactionsRecyclerView.layoutManager = linearLayoutManager
+        transactionsRecyclerView.isNestedScrollingEnabled = true
 
         val dividerLine = DividerItemDecoration(transactionsRecyclerView.context, linearLayoutManager.orientation)
 
@@ -81,6 +81,7 @@ class DashoardActivity : AppCompatActivity() {
             addBalanceTo(transaction)
             val intent = TransactionDetailActivity.createIntent(this, transaction)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }
 

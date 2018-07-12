@@ -1,6 +1,6 @@
 package com.sammekleijn.moneyoutransactions.injection
 
-import com.sammekleijn.moneyoutransactions.view.DashoardActivityTest
+import com.sammekleijn.moneyoutransactions.view.DashboardActivityTest
 import dagger.Component
 import javax.inject.Singleton
 
@@ -8,5 +8,5 @@ import javax.inject.Singleton
 @Component(modules = [AppModule::class, TestServiceModule::class])
 interface TestApplicationComponent : ApplicationComponent {
 
-    fun inject(dashboardActivityTest: DashoardActivityTest)
+    fun inject(dashboardActivityTest: DashboardActivityTest)
 }
