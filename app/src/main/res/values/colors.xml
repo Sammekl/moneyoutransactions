@@ -11,4 +11,6 @@
     <color name="colorOutgoingTransaction">@color/colorGrey</color>
 
     <color name="white">#FFF</color>
+    <color name="colorAccentLight">#a5ecfc</color>
+
 </resources>
