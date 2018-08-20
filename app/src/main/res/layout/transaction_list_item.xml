@@ -1,34 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/transactionItemRelativeLayout"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingBottom="16dp"
-    android:paddingTop="16dp"
-    android:focusable="true"
-    android:clickable="true"
-    android:background="@drawable/transaction_ripple">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/otherAccountTextView"
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="transaction"
+            type="com.sammekleijn.moneyoutransactions.domain.Transaction" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/transactionItemRelativeLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginStart="@dimen/default_vertical_margin_between_objects"
-        android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
-        tools:text="NL18ABNA0484869868" />
+        android:background="@drawable/transaction_ripple"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
 
-    <TextView
-        android:id="@+id/amountTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginStart="@dimen/default_vertical_margin_between_objects"
-        android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        tools:text="+ €15.00"/>
+        <TextView
+            android:id="@+id/otherAccountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+            android:layout_marginStart="@dimen/default_vertical_margin_between_objects"
+            android:textSize="18sp"
+            android:text="@{transaction.otherAccount}"
+            tools:text="NL18ABNA0484869868" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/amountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
+            android:layout_marginStart="@dimen/default_vertical_margin_between_objects"
+            android:textSize="18sp"
+            android:text="@{transaction.amountInEuro}"
+            tools:text="+ €15.00" />
+
+    </RelativeLayout>
+</layout>

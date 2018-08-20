@@ -17,8 +17,8 @@ import com.sammekleijn.moneyoutransactions.extension.toEuro
 import com.sammekleijn.moneyoutransactions.injection.TestApplicationComponent
 import com.sammekleijn.moneyoutransactions.injection.TestServiceModule
 import com.sammekleijn.moneyoutransactions.matcher.EspressoTestMatchers.withIndex
-import com.sammekleijn.moneyoutransactions.model.Customer
-import com.sammekleijn.moneyoutransactions.model.Transaction
+import com.sammekleijn.moneyoutransactions.domain.Customer
+import com.sammekleijn.moneyoutransactions.domain.Transaction
 import com.sammekleijn.moneyoutransactions.service.CustomerService
 import io.reactivex.Single
 import org.hamcrest.Matchers.allOf

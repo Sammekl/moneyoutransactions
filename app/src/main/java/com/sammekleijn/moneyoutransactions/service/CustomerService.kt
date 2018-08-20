@@ -2,7 +2,7 @@ package com.sammekleijn.moneyoutransactions.service
 
 import android.content.Context
 import com.sammekleijn.moneyoutransactions.extension.fromJson
-import com.sammekleijn.moneyoutransactions.model.Customer
+import com.sammekleijn.moneyoutransactions.domain.Customer
 import io.reactivex.Single
 
 open class CustomerService(val context: Context) {
@@ -13,7 +13,7 @@ open class CustomerService(val context: Context) {
         return Single.fromCallable {
             inputStream.fromJson(Customer::class.java)
         }.map {
-            it.transactions = it.transactions.sortedByDescending { it.date }
+            it.transactions = it.transactions.sortedByDescending { it.date }.toMutableList()
             it
         }
     }

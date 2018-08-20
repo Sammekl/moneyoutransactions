@@ -9,7 +9,7 @@ import android.support.test.rule.ActivityTestRule
 import com.sammekleijn.moneyoutransactions.R
 import com.sammekleijn.moneyoutransactions.extension.toDateTimeString
 import com.sammekleijn.moneyoutransactions.extension.toStringWithPrecision
-import com.sammekleijn.moneyoutransactions.model.Transaction
+import com.sammekleijn.moneyoutransactions.domain.Transaction
 import org.junit.Rule
 import org.junit.Test
 import java.util.*

@@ -1,4 +1,4 @@
-package com.sammekleijn.moneyoutransactions.model
+package com.sammekleijn.moneyoutransactions.domain
 
 import junit.framework.Assert.assertEquals
 import org.junit.Before

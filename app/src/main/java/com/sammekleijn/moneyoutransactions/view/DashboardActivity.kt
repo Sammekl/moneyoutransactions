@@ -1,91 +1,51 @@
 package com.sammekleijn.moneyoutransactions.view
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.sammekleijn.moneyoutransactions.R
-import com.sammekleijn.moneyoutransactions.extension.toStringWithPrecision
-import com.sammekleijn.moneyoutransactions.injection.ServiceLocator
-import com.sammekleijn.moneyoutransactions.model.Customer
-import com.sammekleijn.moneyoutransactions.model.Transaction
-import com.sammekleijn.moneyoutransactions.service.CustomerService
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.sammekleijn.moneyoutransactions.databinding.ActivityDashboardBinding
+import com.sammekleijn.moneyoutransactions.domain.Customer
+import com.sammekleijn.moneyoutransactions.domain.Transaction
+import com.sammekleijn.moneyoutransactions.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import java.util.*
-import javax.inject.Inject
 
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity : AppCompatActivity(), TransactionRecyclerViewAdapter.OnTransactionClickListener {
+    val transactionRecyclerViewAdapter = TransactionRecyclerViewAdapter(arrayListOf(), this)
 
-    @Inject
-    lateinit var customerService: CustomerService
-
-    private var transactions: MutableList<Transaction> = ArrayList()
-
-    lateinit var transactionRecyclerViewAdapter: TransactionRecyclerViewAdapter
-
-    lateinit var customer: Customer
+    lateinit var binding: ActivityDashboardBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ServiceLocator.applicationComponent?.inject(this)
         supportActionBar?.hide()
-        setContentView(R.layout.activity_dashboard)
 
-        setupAdapter()
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_dashboard)
+        val viewModel = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
+        binding.viewModel = viewModel
+        binding.executePendingBindings()
 
-        retrieveTransactions()
+        binding.transactionsRv.layoutManager = LinearLayoutManager(this)
+        binding.transactionsRv.adapter = transactionRecyclerViewAdapter
 
+        viewModel.customer.observe(this,
+                Observer<Customer> {
+                    it?.let {
+                        binding.customer = it
+                        transactionRecyclerViewAdapter.set(it.transactions)
+                    }
+                }
+        )
+
+        viewModel.loadCustomer()
     }
 
-    private fun retrieveTransactions() {
-        customerService.getCustomer()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ customer ->
-                    show(customer)
-                }, { error ->
-                    Snackbar.make(coordinatorLayout, getString(R.string.account_retrieval_failed), Snackbar.LENGTH_LONG).show()
-                })
-    }
-
-    private fun setupAdapter() {
-        transactionRecyclerViewAdapter = TransactionRecyclerViewAdapter(transactions) { open(it) }
-
-        val linearLayoutManager = LinearLayoutManager(transactionsRecyclerView.context, LinearLayoutManager.VERTICAL, false)
-        transactionsRecyclerView.layoutManager = linearLayoutManager
-        transactionsRecyclerView.isNestedScrollingEnabled = true
-
-        val dividerLine = DividerItemDecoration(transactionsRecyclerView.context, linearLayoutManager.orientation)
-
-        transactionsRecyclerView.addItemDecoration(dividerLine)
-        transactionsRecyclerView.adapter = transactionRecyclerViewAdapter
-    }
-
-    private fun show(customer: Customer) {
-        this.customer = customer
-        accountNumberTextView.text = customer.account
-        accountBalanceTextView.text = getString(R.string.account_balance, customer.balance.toStringWithPrecision(2))
-
-        transactions.clear()
-        transactions.addAll(customer.transactions)
-        transactionRecyclerViewAdapter.notifyDataSetChanged()
-    }
-
-    private fun open(transaction: Transaction?) {
-        if (transaction == null) {
-            Snackbar.make(coordinatorLayout, getString(R.string.transaction_open_failed), Snackbar.LENGTH_LONG)
-        } else {
-            addBalanceTo(transaction)
-            val intent = TransactionDetailActivity.createIntent(this, transaction)
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-        }
-    }
-
-    private fun addBalanceTo(transaction: Transaction) {
-        transaction.balanceAfterTransaction = customer.getBalanceAt(transaction.date)
+    override fun onTransactionClick(transaction: Transaction) {
+        val intent = TransactionDetailActivity.createIntent(this, transaction)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 }

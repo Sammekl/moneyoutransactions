@@ -9,7 +9,7 @@ import com.sammekleijn.moneyoutransactions.R
 import com.sammekleijn.moneyoutransactions.extension.toDateTimeString
 import com.sammekleijn.moneyoutransactions.extension.toEuro
 import com.sammekleijn.moneyoutransactions.extension.toStringWithPrecision
-import com.sammekleijn.moneyoutransactions.model.Transaction
+import com.sammekleijn.moneyoutransactions.domain.Transaction
 import kotlinx.android.synthetic.main.activity_transaction_detail.*
 
 class TransactionDetailActivity : AppCompatActivity() {
