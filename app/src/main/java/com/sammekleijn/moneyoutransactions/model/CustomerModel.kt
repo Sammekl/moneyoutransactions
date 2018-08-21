@@ -1,14 +1,15 @@
 package com.sammekleijn.moneyoutransactions.model
 
-import com.sammekleijn.moneyoutransactions.MainApplication
+import android.content.Context
 import com.sammekleijn.moneyoutransactions.domain.Customer
 import com.sammekleijn.moneyoutransactions.domain.Transaction
 import com.sammekleijn.moneyoutransactions.extension.fromJson
 import io.reactivex.Observable
+import javax.inject.Inject
 
-class CustomerModel {
-    fun get(): Observable<Customer> {
-        val applicationContext = MainApplication.instance.applicationContext
+open class CustomerModel @Inject constructor(val applicationContext: Context) {
+
+    open fun get(): Observable<Customer> {
         val inputStream = applicationContext.assets.open("transactions.json")
 
         return Observable.fromCallable {

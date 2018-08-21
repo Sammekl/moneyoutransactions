@@ -12,15 +12,15 @@ import android.support.test.espresso.matcher.ViewMatchers.withText
 import android.support.test.rule.ActivityTestRule
 import com.sammekleijn.moneyoutransactions.MainApplication
 import com.sammekleijn.moneyoutransactions.R
+import com.sammekleijn.moneyoutransactions.domain.Customer
+import com.sammekleijn.moneyoutransactions.domain.Transaction
 import com.sammekleijn.moneyoutransactions.extension.launch
 import com.sammekleijn.moneyoutransactions.extension.toEuro
 import com.sammekleijn.moneyoutransactions.injection.TestApplicationComponent
 import com.sammekleijn.moneyoutransactions.injection.TestServiceModule
 import com.sammekleijn.moneyoutransactions.matcher.EspressoTestMatchers.withIndex
-import com.sammekleijn.moneyoutransactions.domain.Customer
-import com.sammekleijn.moneyoutransactions.domain.Transaction
-import com.sammekleijn.moneyoutransactions.service.CustomerService
-import io.reactivex.Single
+import com.sammekleijn.moneyoutransactions.model.CustomerModel
+import io.reactivex.Observable
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -35,11 +35,11 @@ class DashboardActivityTest : BaseActivityTest() {
     @JvmField
     val dashoardActivity = ActivityTestRule(DashboardActivity::class.java, true, false)
 
-    lateinit var customerService: CustomerService
+    lateinit var customerModel: CustomerModel
 
     override fun setupMocks(testServiceModule: TestServiceModule) {
-        this.customerService = mock(CustomerService::class.java)
-        testServiceModule.customerService = customerService
+        this.customerModel = mock(CustomerModel::class.java)
+        testServiceModule.customerModel = customerModel
     }
 
     override fun doInject(testApplicationComponent: TestApplicationComponent) {
@@ -71,11 +71,12 @@ class DashboardActivityTest : BaseActivityTest() {
 
     @Test
     fun showsErrorWhenGetCustomerFails() {
-        givenAnError()
+        val errorMessage = MainApplication.instance.applicationContext.getString(R.string.account_retrieval_failed)
+        givenAnError(errorMessage)
 
         dashoardActivity.launch()
 
-        verifySnackBarIsShown(MainApplication.instance.applicationContext.getString(R.string.account_retrieval_failed))
+        verifySnackBarIsShown(errorMessage)
     }
 
     @Test
@@ -100,13 +101,13 @@ class DashboardActivityTest : BaseActivityTest() {
                 Transaction("t2", -0.39f, "", "Counterparty2", Date(), null)
         ))
 
-        `when`(customerService.getCustomer()).thenReturn(Single.just(customer))
+        `when`(customerModel.get()).thenReturn(Observable.just(customer))
 
         return customer
     }
 
-    private fun givenAnError() {
-        `when`(customerService.getCustomer()).thenReturn(Single.error(IOException("Oops!")))
+    private fun givenAnError(errorMessage: String) {
+        `when`(customerModel.get()).thenReturn(Observable.error(IOException(errorMessage)))
     }
 
 }

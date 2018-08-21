@@ -1,21 +1,18 @@
 package com.sammekleijn.moneyoutransactions.injection
 
 import android.content.Context
-
-import com.sammekleijn.moneyoutransactions.injection.ServiceModule
-import com.sammekleijn.moneyoutransactions.service.CustomerService
-
+import com.sammekleijn.moneyoutransactions.model.CustomerModel
 import dagger.Module
 
 @Module
 open class TestServiceModule : ServiceModule() {
 
-    var customerService: CustomerService? = null
+    var customerModel: CustomerModel? = null
 
-    override fun buildCustomerService(context: Context): CustomerService {
-        if (customerService == null) {
-            customerService = super.buildCustomerService(context)
+    override fun buildCustomerModel(context: Context): CustomerModel {
+        if (customerModel == null) {
+            customerModel = super.buildCustomerModel(context)
         }
-        return customerService as CustomerService
+        return customerModel as CustomerModel
     }
 }

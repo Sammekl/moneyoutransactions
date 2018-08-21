@@ -1,13 +1,17 @@
-package com.sammekleijn.moneyoutransactions.domain
+package com.sammekleijn.moneyoutransactions.model
 
+import com.sammekleijn.moneyoutransactions.domain.Customer
+import com.sammekleijn.moneyoutransactions.domain.Transaction
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.util.*
 
-class CustomerTest {
+class CustomerModelTest {
 
     lateinit var customer: Customer
+
+    val customerModel = CustomerModel()
 
     @Before
     fun setup() {
@@ -24,8 +28,8 @@ class CustomerTest {
 
     @Test
     fun testBalanceAtDate() {
-        assertEquals(customer.balance, customer.getBalanceAt(Date(1631289191)))
-        assertEquals(260.89f, customer.getBalanceAt(Date(1031289191)), 2f)
-        assertEquals(210.80f, customer.getBalanceAt(Date(1331289191)), 2f)
+        assertEquals(customer.balance, customerModel.getBalanceAfterTransaction(customer, customer.transactions[0]))
+        assertEquals(299.8f, customerModel.getBalanceAfterTransaction(customer, customer.transactions[1]))
+        assertEquals(210.8f, customerModel.getBalanceAfterTransaction(customer, customer.transactions[2]))
     }
 }

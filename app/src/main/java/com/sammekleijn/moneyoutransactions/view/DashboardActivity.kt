@@ -31,6 +31,12 @@ class DashboardActivity : AppCompatActivity(), TransactionRecyclerViewAdapter.On
         binding.transactionsRv.layoutManager = LinearLayoutManager(this)
         binding.transactionsRv.adapter = transactionRecyclerViewAdapter
 
+        attachObservers(viewModel)
+
+        viewModel.loadCustomer()
+    }
+
+    private fun attachObservers(viewModel: DashboardViewModel) {
         viewModel.customer.observe(this,
                 Observer<Customer> {
                     it?.let {
@@ -40,7 +46,13 @@ class DashboardActivity : AppCompatActivity(), TransactionRecyclerViewAdapter.On
                 }
         )
 
-        viewModel.loadCustomer()
+        viewModel.errorMessage.observe(this,
+                Observer<String> {
+                    it?.let {
+                        Snackbar.make(coordinatorLayout, it, Snackbar.LENGTH_LONG).show()
+                    }
+                }
+        )
     }
 
     override fun onTransactionClick(transaction: Transaction) {

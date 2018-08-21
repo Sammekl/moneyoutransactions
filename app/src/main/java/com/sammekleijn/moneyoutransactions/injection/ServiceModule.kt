@@ -1,7 +1,7 @@
 package com.sammekleijn.moneyoutransactions.injection
 
 import android.content.Context
-import com.sammekleijn.moneyoutransactions.service.CustomerService
+import com.sammekleijn.moneyoutransactions.model.CustomerModel
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -11,12 +11,12 @@ open class ServiceModule {
 
     @Provides
     @Singleton
-    internal open fun customerService(context: Context): CustomerService {
-        return buildCustomerService(context)
+    internal open fun customerModel(context: Context): CustomerModel {
+        return buildCustomerModel(context)
     }
 
-    protected open fun buildCustomerService(context: Context): CustomerService {
-        return CustomerService(context)
+    protected open fun buildCustomerModel(context: Context): CustomerModel {
+        return CustomerModel(context)
     }
 
 }

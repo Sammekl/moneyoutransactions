@@ -2,21 +2,31 @@ package com.sammekleijn.moneyoutransactions.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.content.Context
 import android.databinding.ObservableField
 import com.sammekleijn.moneyoutransactions.domain.Customer
+import com.sammekleijn.moneyoutransactions.injection.ServiceLocator
 import com.sammekleijn.moneyoutransactions.model.CustomerModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class DashboardViewModel(val customerModel: CustomerModel = CustomerModel()) : ViewModel() {
+class DashboardViewModel: ViewModel() {
+
+    @Inject
+    lateinit var customerModel: CustomerModel
 
     val isLoading = ObservableField<Boolean>()
 
     val customer = MutableLiveData<Customer>()
 
+    val errorMessage = MutableLiveData<String>()
+
     private val compositeDisposable = CompositeDisposable()
+
+    init {
+        ServiceLocator.applicationComponent?.inject(this)
+    }
 
     fun loadCustomer() {
         isLoading.set(true)
@@ -27,7 +37,7 @@ class DashboardViewModel(val customerModel: CustomerModel = CustomerModel()) : V
                 .subscribe({ data ->
                     customer.value = data
                 }, { error ->
-                    // Empty
+                    errorMessage.value = error.message
                 }, {
                     isLoading.set(false)
                 }))
