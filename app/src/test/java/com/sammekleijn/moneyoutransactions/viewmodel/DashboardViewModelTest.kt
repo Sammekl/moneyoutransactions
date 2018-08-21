@@ -8,7 +8,8 @@ import com.sammekleijn.moneyoutransactions.domain.Customer
 import com.sammekleijn.moneyoutransactions.model.CustomerModel
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import junit.framework.Assert.*
+import junit.framework.Assert.assertFalse
+import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -23,8 +24,8 @@ class DashboardViewModelTest {
     @JvmField
     val rule = InstantTaskExecutorRule()
 
-    lateinit var dashboardViewModel: DashboardViewModel
-    lateinit var customerModel: CustomerModel
+    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var customerModel: CustomerModel
 
     @Before
     fun setup() {

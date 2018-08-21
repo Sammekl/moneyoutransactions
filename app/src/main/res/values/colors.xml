@@ -4,11 +4,6 @@
     <color name="colorPrimary">#535A92</color>
     <color name="colorPrimaryDark">#535A92</color>
     <color name="colorAccent">#22ACCC</color>
-    <color name="colorGrey">#9b9b9b</color>
-
-    // Transaction colors
-    <color name="colorIncomingTransaction">@color/colorPrimary</color>
-    <color name="colorOutgoingTransaction">@color/colorGrey</color>
 
     <color name="white">#FFF</color>
     <color name="colorAccentLight">#a5ecfc</color>

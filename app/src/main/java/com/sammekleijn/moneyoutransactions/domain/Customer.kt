@@ -4,7 +4,7 @@ import android.databinding.BaseObservable
 import android.databinding.Bindable
 import com.sammekleijn.moneyoutransactions.BR
 
-class Customer(val account: String, balance: Float, var transactions: MutableList<Transaction>): BaseObservable(){
+class Customer(val account: String, balance: Float, var transactions: MutableList<Transaction>) : BaseObservable() {
 
     @get:Bindable
     var balance: Float = balance

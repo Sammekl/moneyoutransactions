@@ -91,8 +91,8 @@
                     style="@style/TextAppearance.CardView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{transaction.otherAccount}"
                     android:layout_below="@id/transactionCounterpartyInfoTextView"
+                    android:text="@{transaction.otherAccount}"
                     tools:text="NL91ABNA0417164300" />
 
                 <TextView
@@ -108,8 +108,8 @@
                     style="@style/TextAppearance.CardView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.format(@string/account_balance, FloatExtKt.toStringWithPrecision(transaction.balanceBeforeTransaction(), 2))}"
                     android:layout_below="@id/balanceBeforeTransactionInfoTextView"
+                    android:text="@{String.format(@string/account_balance, FloatExtKt.toStringWithPrecision(transaction.balanceBeforeTransaction(), 2))}"
                     tools:text="€279,69" />
 
                 <TextView
@@ -125,8 +125,8 @@
                     style="@style/TextAppearance.CardView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.format(@string/account_balance, FloatExtKt.toStringWithPrecision(transaction.balanceAfterTransaction, 2))}"
                     android:layout_below="@id/balanceAfterTransactionInfoTextView"
+                    android:text="@{String.format(@string/account_balance, FloatExtKt.toStringWithPrecision(transaction.balanceAfterTransaction, 2))}"
                     tools:text="€300" />
             </RelativeLayout>
 

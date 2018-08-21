@@ -11,9 +11,9 @@ import java.util.*
 
 class CustomerModelTest {
 
-    lateinit var customer: Customer
+    private lateinit var customer: Customer
 
-    val customerModel = CustomerModel(mock(Context::class.java))
+    private val customerModel = CustomerModel(mock(Context::class.java))
 
     @Before
     fun setup() {

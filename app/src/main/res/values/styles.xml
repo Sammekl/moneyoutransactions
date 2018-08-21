@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,9 +10,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/default_vertical_margin_between_layouts</item>
-        <item name="android:layout_marginBottom">@dimen/default_vertical_margin_between_layouts</item>
-        <item name="android:layout_marginLeft">@dimen/default_horizontal_margin_between_layouts</item>
-        <item name="android:layout_marginRight">@dimen/default_horizontal_margin_between_layouts</item>
+        <item name="android:layout_marginBottom">@dimen/default_vertical_margin_between_layouts
+        </item>
+        <item name="android:layout_marginLeft">@dimen/default_horizontal_margin_between_layouts
+        </item>
+        <item name="android:layout_marginRight">@dimen/default_horizontal_margin_between_layouts
+        </item>
         <item name="cardCornerRadius">0dp</item>
         <item name="cardBackgroundColor">@color/white</item>
         <item name="cardUseCompatPadding">false</item>
@@ -19,13 +23,18 @@
         <item name="cardElevation">2dp</item>
     </style>
 
+    <style name="TextAppearance" />
+
     <style name="TextAppearance.CardView" parent="TextAppearance.AppCompat.Small">
-        <item name="android:layout_marginLeft">@dimen/default_horizontal_margin_between_objects</item>
-        <item name="android:layout_marginRight">@dimen/default_horizontal_margin_between_objects</item>
+        <item name="android:layout_marginLeft">@dimen/default_horizontal_margin_between_objects
+        </item>
+        <item name="android:layout_marginRight">@dimen/default_horizontal_margin_between_objects
+        </item>
     </style>
 
     <style name="TextAppearance.CardView.Header" parent="TextAppearance.CardView">
-        <item name="android:layout_marginTop">@dimen/default_horizontal_margin_between_objects</item>
+        <item name="android:layout_marginTop">@dimen/default_horizontal_margin_between_objects
+        </item>
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginBottom">0dp</item>

@@ -35,7 +35,7 @@ class DashboardActivityTest : BaseActivityTest() {
     @JvmField
     val dashoardActivity = ActivityTestRule(DashboardActivity::class.java, true, false)
 
-    lateinit var customerModel: CustomerModel
+    private lateinit var customerModel: CustomerModel
 
     override fun setupMocks(testServiceModule: TestServiceModule) {
         this.customerModel = mock(CustomerModel::class.java)

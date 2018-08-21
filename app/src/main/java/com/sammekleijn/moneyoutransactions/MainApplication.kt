@@ -1,11 +1,14 @@
 package com.sammekleijn.moneyoutransactions
 
 import android.app.Application
-import com.sammekleijn.moneyoutransactions.injection.*
+import com.sammekleijn.moneyoutransactions.injection.AppModule
+import com.sammekleijn.moneyoutransactions.injection.ApplicationComponent
+import com.sammekleijn.moneyoutransactions.injection.DaggerApplicationComponent
+import com.sammekleijn.moneyoutransactions.injection.ServiceLocator
 
-class MainApplication: Application() {
+class MainApplication : Application() {
 
-    val component: ApplicationComponent by lazy {
+    private val component: ApplicationComponent by lazy {
         DaggerApplicationComponent
                 .builder()
                 .appModule(AppModule(this))

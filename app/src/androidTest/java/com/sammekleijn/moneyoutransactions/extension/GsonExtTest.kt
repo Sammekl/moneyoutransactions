@@ -2,7 +2,8 @@ package com.sammekleijn.moneyoutransactions.extension
 
 import android.support.test.InstrumentationRegistry
 import com.sammekleijn.moneyoutransactions.domain.Customer
-import junit.framework.Assert.*
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertNotNull
 import org.junit.Test
 
 

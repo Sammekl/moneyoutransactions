@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -27,8 +28,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
             android:layout_marginStart="@dimen/default_vertical_margin_between_objects"
-            android:textSize="18sp"
             android:text="@{transaction.otherAccount}"
+            android:textSize="18sp"
             tools:text="NL18ABNA0484869868" />
 
         <TextView
@@ -39,8 +40,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginEnd="@dimen/default_vertical_margin_between_objects"
             android:layout_marginStart="@dimen/default_vertical_margin_between_objects"
-            android:textSize="18sp"
             android:text="@{transaction.amountInEuro}"
+            android:textSize="18sp"
             tools:text="+ €15.00" />
 
     </RelativeLayout>

@@ -15,9 +15,9 @@ import com.sammekleijn.moneyoutransactions.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.activity_dashboard.*
 
 class DashboardActivity : AppCompatActivity(), TransactionRecyclerViewAdapter.OnTransactionClickListener {
-    val transactionRecyclerViewAdapter = TransactionRecyclerViewAdapter(arrayListOf(), this)
+    private val transactionRecyclerViewAdapter = TransactionRecyclerViewAdapter(arrayListOf(), this)
 
-    lateinit var binding: ActivityDashboardBinding
+    private lateinit var binding: ActivityDashboardBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -14,7 +14,7 @@ open class CustomerModel @Inject constructor(val applicationContext: Context) {
 
         return Observable.fromCallable {
             inputStream.fromJson(Customer::class.java)
-        }.map {customer ->
+        }.map { customer ->
             customer.transactions = customer.transactions.sortedByDescending { it.date }.toMutableList()
             customer.transactions.forEach { transaction ->
                 transaction.balanceAfterTransaction = getBalanceAfterTransaction(customer, transaction)

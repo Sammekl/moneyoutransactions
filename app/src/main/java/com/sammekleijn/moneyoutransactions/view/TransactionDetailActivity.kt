@@ -10,13 +10,12 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.sammekleijn.moneyoutransactions.R
 import com.sammekleijn.moneyoutransactions.databinding.ActivityTransactionDetailBinding
-import com.sammekleijn.moneyoutransactions.domain.Customer
 import com.sammekleijn.moneyoutransactions.domain.Transaction
 import com.sammekleijn.moneyoutransactions.viewmodel.TransactionDetailModel
 
 class TransactionDetailActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityTransactionDetailBinding
+    private lateinit var binding: ActivityTransactionDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +33,7 @@ class TransactionDetailActivity : AppCompatActivity() {
                 Observer<Transaction> {
                     it?.let {
                         binding.transaction = it
+                        supportActionBar?.title = getString(R.string.transaction_id, it.id)
                     }
                 }
         )
@@ -43,7 +43,7 @@ class TransactionDetailActivity : AppCompatActivity() {
         if (item.itemId == android.R.id.home) {
             closeActivity()
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onBackPressed() {
