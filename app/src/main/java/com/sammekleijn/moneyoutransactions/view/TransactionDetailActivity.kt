@@ -1,29 +1,42 @@
 package com.sammekleijn.moneyoutransactions.view
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import com.sammekleijn.moneyoutransactions.R
-import com.sammekleijn.moneyoutransactions.extension.toDateTimeString
-import com.sammekleijn.moneyoutransactions.extension.toEuro
-import com.sammekleijn.moneyoutransactions.extension.toStringWithPrecision
+import com.sammekleijn.moneyoutransactions.databinding.ActivityTransactionDetailBinding
+import com.sammekleijn.moneyoutransactions.domain.Customer
 import com.sammekleijn.moneyoutransactions.domain.Transaction
-import kotlinx.android.synthetic.main.activity_transaction_detail.*
+import com.sammekleijn.moneyoutransactions.viewmodel.TransactionDetailModel
 
 class TransactionDetailActivity : AppCompatActivity() {
 
-    lateinit var transaction: Transaction
+    lateinit var binding: ActivityTransactionDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_transaction_detail)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_transaction_detail)
+        val viewModel = ViewModelProviders.of(this).get(TransactionDetailModel::class.java)
+        binding.viewModel = viewModel
+        binding.executePendingBindings()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        transaction = intent.getParcelableExtra(TRANSACTION_EXTRA)
-        show()
 
+        viewModel.show(intent.getParcelableExtra(TRANSACTION_EXTRA))
+
+        viewModel.transaction.observe(this,
+                Observer<Transaction> {
+                    it?.let {
+                        binding.transaction = it
+                    }
+                }
+        )
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -40,28 +53,6 @@ class TransactionDetailActivity : AppCompatActivity() {
     private fun closeActivity() {
         finish()
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
-    }
-
-    private fun show() {
-            title = getString(R.string.transaction_id, transaction.id)
-            transactionCounterpartyTextView.text = transaction.otherAccount
-            transactionAmountTextView.text = transaction.amount.toEuro()
-            transactionDescriptionTextView.text = transaction.description
-            transactionDateTextView.text = transaction.date.toDateTimeString()
-            transaction.balanceAfterTransaction?.let {
-                balanceBeforeTransactionTextView.text = getString(R.string.account_balance, (it + transaction.amount.unaryMinus()).toStringWithPrecision(2))
-                balanceAfterTransactionTextView.text = getString(R.string.account_balance, it.toStringWithPrecision(2))
-            } ?: run {
-                balanceBeforeTransactionTextView.text = getString(R.string.unknown)
-                balanceAfterTransactionTextView.text = getString(R.string.unknown)
-            }
-
-            balanceAfterTransactionTextView.text = if (transaction.balanceAfterTransaction != null) {
-                getString(R.string.account_balance, transaction.balanceAfterTransaction!!.toStringWithPrecision(2))
-            } else {
-                getString(R.string.unknown)
-            }
-
     }
 
     companion object {
