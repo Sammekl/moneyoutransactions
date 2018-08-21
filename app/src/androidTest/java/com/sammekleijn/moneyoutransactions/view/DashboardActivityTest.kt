@@ -24,7 +24,7 @@ import io.reactivex.Observable
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.`when`
+import org.mockito.BDDMockito.given
 import org.mockito.Mockito.mock
 import java.io.IOException
 import java.util.*
@@ -101,13 +101,13 @@ class DashboardActivityTest : BaseActivityTest() {
                 Transaction("t2", -0.39f, "", "Counterparty2", Date(), null)
         ))
 
-        `when`(customerModel.get()).thenReturn(Observable.just(customer))
+        given(customerModel.get()).willReturn(Observable.just(customer))
 
         return customer
     }
 
     private fun givenAnError(errorMessage: String) {
-        `when`(customerModel.get()).thenReturn(Observable.error(IOException(errorMessage)))
+        given(customerModel.get()).willReturn(Observable.error(IOException(errorMessage)))
     }
 
 }

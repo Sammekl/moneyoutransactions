@@ -1,17 +1,19 @@
 package com.sammekleijn.moneyoutransactions.model
 
+import android.content.Context
 import com.sammekleijn.moneyoutransactions.domain.Customer
 import com.sammekleijn.moneyoutransactions.domain.Transaction
 import junit.framework.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mockito.mock
 import java.util.*
 
 class CustomerModelTest {
 
     lateinit var customer: Customer
 
-    val customerModel = CustomerModel()
+    val customerModel = CustomerModel(mock(Context::class.java))
 
     @Before
     fun setup() {

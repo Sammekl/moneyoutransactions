@@ -43,41 +43,4 @@ class TransactionRecyclerViewAdapter(private var transactions: MutableList<Trans
             binding.executePendingBindings()
         }
     }
-
-//    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//
-//        private var transaction: Transaction? = null
-//
-//        private val relativeLayout = view.findViewById<RelativeLayout>(R.id.transactionItemRelativeLayout)
-//        private val otherAccountTextView = view.findViewById<TextView>(R.id.otherAccountTextView)
-//        private val amountTextView = view.findViewById<TextView>(R.id.amountTextView)
-//
-//        val context = view.context
-//
-//        init {
-//            relativeLayout!!.setOnClickListener {
-//                openListener(layoutPosition)
-//            }
-//        }
-//
-//        fun showTransaction(transaction: Transaction) {
-//            this.transaction = transaction
-//            otherAccountTextView.text = transaction.otherAccount
-//            formatAmount(transaction.amount)
-//        }
-//
-//        private fun formatAmount(amount: Float) {
-//            val incomingTransaction = amount > 0.0
-//
-//            amountTextView.text = amount.toEuro(2)
-//
-//            val colorResource = if (incomingTransaction) {
-//                R.color.colorIncomingTransaction
-//            } else {
-//                R.color.colorOutgoingTransaction
-//            }
-//
-//            amountTextView.setTextColor(ContextCompat.getColor(context, colorResource))
-//        }
-//    }
 }

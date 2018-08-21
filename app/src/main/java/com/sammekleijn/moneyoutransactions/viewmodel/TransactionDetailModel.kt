@@ -11,5 +11,4 @@ class TransactionDetailModel : ViewModel() {
     fun show(transaction: Transaction) {
         this.transaction.value = transaction
     }
-
 }

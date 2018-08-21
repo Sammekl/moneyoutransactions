@@ -11,7 +11,11 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class DashboardViewModel: ViewModel() {
+class DashboardViewModel(): ViewModel() {
+
+    constructor(customerModel: CustomerModel) : this() {
+        this.customerModel = customerModel
+    }
 
     @Inject
     lateinit var customerModel: CustomerModel
@@ -33,11 +37,10 @@ class DashboardViewModel: ViewModel() {
 
         compositeDisposable.add(customerModel.get()
                 .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ data ->
-                    customer.value = data
+                    customer.postValue(data)
                 }, { error ->
-                    errorMessage.value = error.message
+                    errorMessage.postValue(error.message)
                 }, {
                     isLoading.set(false)
                 }))
