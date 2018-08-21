@@ -7,6 +7,8 @@ import com.nhaarman.mockito_kotlin.verify
 import com.sammekleijn.moneyoutransactions.domain.Customer
 import com.sammekleijn.moneyoutransactions.model.CustomerModel
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
+import junit.framework.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -38,7 +40,7 @@ class DashboardViewModelTest {
 
         given(customerModel.get()).willReturn(Observable.just(customer))
 
-        dashboardViewModel.loadCustomer()
+        dashboardViewModel.loadCustomer(Schedulers.trampoline())
 
         verify(observer).onChanged(customer)
     }
@@ -51,8 +53,20 @@ class DashboardViewModelTest {
 
         given(customerModel.get()).willReturn(Observable.error(error))
 
-        dashboardViewModel.loadCustomer()
+        dashboardViewModel.loadCustomer(Schedulers.trampoline())
 
         verify(observer).onChanged(error.message)
+    }
+
+    @Test
+    fun testObserveIsLoading() {
+        assertFalse(dashboardViewModel.isLoading.get()!!)
+
+        val customer = Customer("My account", 5f, mutableListOf())
+        given(customerModel.get()).willReturn(Observable.just(customer))
+
+        dashboardViewModel.loadCustomer(Schedulers.newThread())
+
+        assertTrue(dashboardViewModel.isLoading.get()!!)
     }
 }
